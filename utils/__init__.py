@@ -8,7 +8,7 @@ def date_to_string(dateObj):
         return None
 
 
-def string_to_date(dateStr):
+def string_end_date(dateStr):
     if dateStr:
         return datetime.strptime(dateStr, "%Y-%m-%d")
     else:

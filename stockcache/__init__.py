@@ -1,6 +1,5 @@
 import utils
-from datasource import dataouttypes
-from datasource.quandl import DataSource
+from datasource import DataSource
 
 
 class StockCacheManager:
@@ -11,26 +10,26 @@ class StockCacheManager:
     """
     def __init__(self):
         self.stock_cache = {}
-        self.datasource = DataSource(columns=['Open', 'Close'])
+        self.datasource = DataSource()
 
         # We will use this to pass data within the class as data can be huge
         # and we do not want data passing overhead
         self.stockdata = None
 
-    def add_stock_to_cache(self, stock_code, from_date, to_date):
+    def add_stock_to_cache(self, stock_code, start_date, end_date):
         self.stock_cache[stock_code] = {
-            "from_date": utils.string_to_date(from_date),
-            "to_date": utils.string_to_date(to_date),
+            "start_date": utils.string_end_date(start_date),
+            "end_date": utils.string_end_date(end_date),
             "data": self.stockdata
         }
 
-    def get_stock_data(self, stock_code, from_date, to_date):
+    def get_data(self, stock_code, start_date, end_date, columns):
         if stock_code in self.stock_cache:
             print('From Cache')
-            return self.stock_cache[stock_code]["data"][utils.string_to_date(from_date):utils.string_to_date(to_date)]
+            return self.stock_cache[stock_code]["data"][utils.string_end_date(start_date):utils.string_end_date(end_date)]
         else:
-            print('From Quandl')
-            self.stockdata = self.datasource.get_data(stock_code, from_date, to_date, dataouttypes.PANDAS_DATAFRAME)
-            self.add_stock_to_cache(stock_code, from_date, to_date)
+            print('From Datasource')
+            self.stockdata = self.datasource.get_data(stock_code, start_date, end_date)
+            self.add_stock_to_cache(stock_code, start_date, end_date)
 
         return self.stockdata
