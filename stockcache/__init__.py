@@ -24,12 +24,13 @@ class StockCacheManager:
         }
 
     def get_data(self, stock_code, start_date, end_date, columns):
-        if stock_code in self.stock_cache:
-            print('From Cache')
-            return self.stock_cache[stock_code]["data"][utils.string_end_date(start_date):utils.string_end_date(end_date)]
-        else:
-            print('From Datasource')
-            self.stockdata = self.datasource.get_data(stock_code, start_date, end_date)
-            self.add_stock_to_cache(stock_code, start_date, end_date)
+        # if stock_code in self.stock_cache:
+        #     print('From Cache')
+        #     return self.stock_cache[stock_code]["data"][utils.string_end_date(start_date):utils.string_end_date(end_date)]
+        # else:
+        #     print('From Datasource')
+        #     self.stockdata = self.datasource.get_data(stock_code, start_date, end_date)
+        #     self.add_stock_to_cache(stock_code, start_date, end_date)
 
+        self.stockdata = self.datasource.get_data(stock_code, start_date, end_date)
         return self.stockdata
