@@ -15,7 +15,7 @@ if __name__ == "__main__":
     print("Hello world !!")
     s = StockCacheManager()
 
-    stockData = s.get_data("NSE/TCS", "2018-01-01", "2018-01-31", ["Open", "Close"])
+    stockData = s.get_data("NIFTY", "2018-04-01", "2018-04-30", ["Open", "Close"])
     #print(s.get_data("NSE/TCS", "2018-01-01", "2018-01-31", ["Open", "Close"]))
 
     # SMA

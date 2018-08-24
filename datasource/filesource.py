@@ -3,10 +3,14 @@ import os
 import config
 
 class FileSource:
-    def __init__(self):
+    def __init__(self, colNames=[], dateTimeCols=[], useColsNo=()):
         self.stockdata = None
+        self.colNames = colNames
+        self.dateTimeCols = dateTimeCols
+        self.useColsNo = useColsNo
+
 
     def get_data(self, path):
-        self.stockdata = pd.read_csv(path, usecols=range(1, 7), parse_dates=[[0, 1]], index_col=0,
-                                     names=["DATE", "TIME", "OPEN", "HIGH", "LOW", "CLOSE"])
+        self.stockdata = pd.read_csv(path, usecols=self.useColsNo, parse_dates=[self.dateTimeCols], index_col=0,
+                                     names=self.colNames)
         return self.stockdata
