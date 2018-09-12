@@ -26,6 +26,7 @@ class DataSource:
         """
 
         self.stockdata = self.fileDB.get_data(os.path.join(config.APP_ROOT, "Nifty_Data_02Apr.csv"))
+
         # self.stockdata = self.sqlDB.get_data()
         # if not self.stockdata:
         #     if columns is not None and len(columns) > 0:
